@@ -38,6 +38,11 @@ bool List<T>::re_size()
 
 	return true;
 }
+template<typename T>
+bool List<T>::is_valid(int pos)
+{
+	return pos > -1 && pos < size;
+}
 
 /*
  * returns the value at the position passed in.
@@ -46,14 +51,14 @@ bool List<T>::re_size()
 template<typename T>
 T List<T>::at(int pos)
 {
-	if(pos < size) return _container[pos];
+	if(is_valid(pos)) return _container[pos];
 	else return _container[_size-1];
 }
 
 template<typename T>
 bool List<T>::assign(int pos, T value)
 {
-	if(pos >= _size) return false;
+	if(!is_valid(pos)) return false;
 	_container[pos] = value;
 	return true;
 }
@@ -61,8 +66,8 @@ bool List<T>::assign(int pos, T value)
 template<typename T>
 bool List<T>::insert(int pos, T value)
 {
-	if(pos >= _size) return false;
-	if(pos < _size && _size < _capacity)
+	if(!is_valid(pos)) return false;
+	if(_size < _capacity)
 	{
 		int temp = _size;
 		while(temp >= pos)
@@ -100,7 +105,7 @@ bool List<T>::push_front(T value)
 template<typename T>
 bool List<T>::remove(int pos)
 {
-	if(pos >= _size) return false;
+	if(!is_valid(pos)) return false;
 	int temp = pos;
 	while(temp < _size-1)
 	{
@@ -113,6 +118,7 @@ bool List<T>::remove(int pos)
 template<typename T>
 bool List<T>::pop_back()
 {
+	if (!_size) return false;
 	_size--;
 	return true;
 }

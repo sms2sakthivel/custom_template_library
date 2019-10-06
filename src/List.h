@@ -16,6 +16,7 @@ class List
 	int _size,_capacity;
 	T *_container, *_temp;
 	bool re_size();
+	bool is_valid(int pos);
 public:
 	List();
 	~List();
@@ -37,4 +38,4 @@ public:
 };
 }
 
-#endif /* LIST_H_ */
+#endif /* !LIST_H_ */
