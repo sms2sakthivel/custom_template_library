@@ -37,6 +37,4 @@ public:
 };
 }
 
-
-
 #endif /* LIST_H_ */
