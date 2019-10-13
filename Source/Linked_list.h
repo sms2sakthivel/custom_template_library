@@ -10,18 +10,21 @@
 namespace custom
 {
 	template<typename T>
+	struct Node
+	{
+		Node* next;
+		T data;
+		typedef Node<T> Element;
+	};
+	
+	template<typename T>
 	class Linked_list
 	{
-		struct Node 
-		{
-			Node* next;
-			T data;
-		}Element;
-		Element *_head, *_tail, *_temp;
+		typename Node<T>::Element *_head, *_tail, *_temp;
 		int _size;
 		bool is_valid(int pos);
 		T get(int pos);
-		Element* get_ptr(int pos);
+		typename Node<T>::Element* get_ptr(int pos);
 	public:
 		Linked_list();
 		~Linked_list();
@@ -34,8 +37,8 @@ namespace custom
 		bool pop_back();
 		bool pop_front();
 		int size();
-		Element* begin();
-		Element* end();
+		typename Node<T>::Element* begin();
+		typename Node<T>::Element* end();
 		bool empty();
 		void print();
 	};

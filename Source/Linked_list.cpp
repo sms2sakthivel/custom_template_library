@@ -5,6 +5,7 @@
  *      Author: Sakthivel Ganesan
  */
 #include "Linked_list.h"
+#include <iostream>
 namespace custom
 {
 	template<typename T>
@@ -33,9 +34,9 @@ namespace custom
 	}
 
 	template<typename T>
-	Element* Linked_list<T>::get_ptr(int pos)
+	typename Node<T>::Element* Linked_list<T>::get_ptr(int pos)
 	{
-		Element *temp = _head;
+		typename Node<T>::Element* temp = _head;
 		for (int idx = 0; idx < pos; idx++)
 			temp = temp->next;
 		return temp;
@@ -61,7 +62,7 @@ namespace custom
 	{
 		if (!is_valid(pos)) return false;
 
-		_temp = new Element;
+		_temp = new typename Node<T>::Element;
 		if (!_temp) return false;
 
 		_temp->data = value;
@@ -76,7 +77,7 @@ namespace custom
 	template<typename T>
 	bool Linked_list<T>::push_back(T value)
 	{
-		_temp = new Element;
+		_temp = new typename Node<T>::Element;
 		if (!_temp) return false;
 
 		_temp->data = value;
@@ -86,7 +87,7 @@ namespace custom
 		else
 		{
 			_tail->next = _temp;
-			_tail = temp;
+			_tail = _temp;
 		}
 		_size++;
 		return true;
@@ -146,13 +147,13 @@ namespace custom
 	}
 
 	template<typename T>
-	Element* Linked_list<T>::begin()
+	typename Node<T>::Element* Linked_list<T>::begin()
 	{
 		return _head;
 	}
 
 	template<typename T>
-	Element* Linked_list<T>::end()
+	typename Node<T>::Element* Linked_list<T>::end()
 	{
 		return _tail;
 	}
@@ -166,7 +167,7 @@ namespace custom
 	template<typename T>
 	void Linked_list<T>::print()
 	{
-		_temp = _head
+		_temp = _head;
 		for (int idx = 0; idx < _size; idx++)
 		{
 			std::cout << " " << _temp->data;
