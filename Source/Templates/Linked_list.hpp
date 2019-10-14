@@ -1,15 +1,51 @@
 /*
- * Linked_list.h
+ * Linked_list.hpp
  *
  *  Created on: Oct 6, 2019
  *      Author: Sakthivel Ganesan
  */
-#include "Linked_list.h"
+#ifndef _LINKED_LIST_
+#define _LINKED_LIST_
 #include <iostream>
+
 namespace custom
 {
 	template<typename T>
-	Linked_list<T>::Linked_list():_head(0),_tail(0),_temp(0),_size(0)
+	struct Node
+	{
+		Node* next;
+		T data;
+		typedef Node<T> Element;
+	};
+	
+	template<typename T>
+	class Linked_list
+	{
+		typename Node<T>::Element *_head, *_tail, *_temp;
+		int _size;
+		bool is_valid(int pos);
+		T get(int pos);
+		typename Node<T>::Element* get_ptr(int pos);
+	public:
+		Linked_list();
+		~Linked_list();
+		T at(int pos);
+		bool assign(int pos, T value);
+		bool insert(int pos,T value);
+		bool push_back(T value);
+		bool push_front(T value);
+		bool remove(int pos);
+		bool pop_back();
+		bool pop_front();
+		int size();
+		typename Node<T>::Element* begin();
+		typename Node<T>::Element* end();
+		bool empty();
+		void print();
+	};
+
+	template<typename T>
+	Linked_list<T>::Linked_list() :_head(0), _tail(0), _temp(0), _size(0)
 	{
 	}
 
@@ -103,7 +139,7 @@ namespace custom
 	bool Linked_list<T>::remove(int pos)
 	{
 		if (!is_valid(pos)) return false;
-	
+
 		_temp = get_ptr(pos);
 		if (!_temp->next) delete _temp;
 		else
@@ -122,7 +158,7 @@ namespace custom
 
 		_temp = get_ptr(_size - 1);
 		delete _temp;
-		
+
 		if (_size == 1)
 			_head = _tail = 0;
 		else
@@ -176,3 +212,4 @@ namespace custom
 		std::cout << std::endl;
 	}
 }
+#endif // _LINKED_LIST_
